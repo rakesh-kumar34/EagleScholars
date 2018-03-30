@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,33 +7,55 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+    <style>
+        body {
+            background: -moz-linear-gradient(125deg, rgba(39, 107, 130, 1) 0, rgba(49, 84, 129, 1) 100%);
+            background: -webkit-linear-gradient(125deg, rgba(39, 107, 130, 1) 0, rgba(49, 84, 129, 1) 100%);
+            background: -o-linear-gradient(125deg, rgba(39, 107, 130, 1) 0, rgba(49, 84, 129, 1) 100%);
+            background: -ms-linear-gradient(125deg, rgba(39, 107, 130, 1) 0, rgba(49, 84, 129, 1) 100%);
+            background: linear-gradient(325deg, rgba(39, 107, 130, 1) 0, rgba(49, 84, 129, 1) 100%);
+        }
 
-    
+        .container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        #loginbox {
+            margin-top: 100px;
+            width: 40%;
+        }
+        .panel-title {
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
 
     <script>
-        $(document).ready(function(){
-            $("#btn-login").click(function(){
+        $(document).ready(function () {
+            $("#btn-login").click(function () {
                 $("#admin-fg").val("N");
             });
-            $("#admin-login").click(function(){
+            $("#admin-login").click(function () {
                 $("#admin-fg").val("Y");
             });
 
             $("#loginform").validator();
-            
+
         });
     </script>
 </head>
 
 <body>
     <div class="container">
-        <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div id="loginbox" style="margin-top:100px;" class="mainbox col-md-7 col-sm-8">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <div class="panel-title">Please Sign In</div>
+                    <div class="panel-title">Eagles Scholar's University - Please Sign In</div>
                 </div>
 
-                <div style="padding-top:30px" class="panel-body">
+                <div style="padding-top:30px; background: rgba(250, 250, 250, .9);" class="panel-body">
                     <% if (message.length > 0) { %>
                         <div class="alert alert-danger col-sm-12">
                             <%= message %>
@@ -47,7 +70,7 @@
                                     </span>
                                     <input id="login-username" type="text" class="form-control" name="user_name" value="" placeholder="username" required>
                                 </div>
-                                
+
                                 <div style="margin-bottom: 25px" class="input-group">
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-lock"></i>
@@ -55,8 +78,9 @@
                                     <input id="login-password" type="password" class="form-control" name="password" placeholder="password" required>
                                 </div>
                                 <div class="checkbox">
-                                        <label><input type="checkbox"> Remember me</label>
-                                      </div>
+                                    <label>
+                                        <input type="checkbox"> Remember me</label>
+                                </div>
                                 <div style="margin-top:10px" class="form-group">
                                     <!-- Button -->
                                     <div class="col-md-12 controls">
