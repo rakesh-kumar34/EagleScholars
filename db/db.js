@@ -1,9 +1,9 @@
 var mysql = require('mysql');
 var db_config = {
-    host: 'us-cdbr-iron-east-05.cleardb.net',
-    user: 'b1815fb31e8ae5',
-    password: '073c96f1',
-    database: 'heroku_d64d553307ea5a4'
+    host: 'iwqrvsv8e5fz4uni.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+    user: 'nbfomxkxx6gaetxg',
+    password: 'muouz9n5ccqp29r3',
+    database: 'oqew7c94lsan66uv'
 };
 var connection;
 function handleDisconnect() {
@@ -30,3 +30,4 @@ function handleDisconnect() {
   handleDisconnect();
   
 module.exports = connection;
+
