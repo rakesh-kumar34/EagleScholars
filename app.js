@@ -11,6 +11,7 @@ var express = require('express'),
 var session = require('express-session');
 // Create new app in Express
 var app = express();
+const port = process.env.PORT || 8080;
 // Get Database Connection Object
 var connection = require('./db/db');
 global.db = connection;
@@ -55,6 +56,6 @@ app.post('/home/signup', user.signup); //call for signup student post
 app.post('/home/studentfeedback', user.studentfeedback); //call for student feedback post 
 
 // Server
-app.listen(8080, () => {
-  console.log("Server listening on port 8080");
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
