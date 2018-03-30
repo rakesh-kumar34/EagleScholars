@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <!-- External Style Sheet -->
+  <link rel='stylesheet' type='text/css' href='/css/style.css' />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style>
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      max-width: 600px;
+      margin: auto;
+      text-align: center;
+      font-family: arial;
+      margin-bottom: 25px;
+    }
+
+    .title {
+      color: grey;
+      font-size: 18px;
+    }
+
+    /* Style the buttons that are used to open and close the accordion panel */
+
+    .accordion {
+      width: 100%;
+      transition: 0.4s;
+      display: inline-block;
+      outline: none;
+    }
+
+    /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+
+    .card .active:hover {
+      background-color: #ccc;
+    }
+
+    .accordion:after {
+      content: '\002B';
+      font-weight: bold;
+      float: right;
+      margin-left: 5px;
+    }
+
+    .card .active:after {
+      content: "\2212";
+    }
+
+    .panel {
+      padding: 0 18px;
+      background-color: white;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.2s ease-out;
+    }
+  </style>
+</head>
+
+<body class="animated fadeInRight">
+  <div class="wrapper">
+    <!-- Header -->
+    <header>
+      <div style="display:inline">
+        <a href="index.html" style="text-decoration:none">
+          <img src="/img/ESU.png" alt="ESU" width="1305" height="400" class="name" style="vertical-align:middle" />
+          <img src="/img/lion.png" alt="Tasby Lion Logo" width="180" height="236" class="logo" style="vertical-align:middle" />
+        </a>
+      </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+      <nav>
+        <ul>
+          <li>
+            <a href="/home/admin_dashboard">Home</a>
+          </li>
+          <li class="active">
+            <a href="/home/admin_profile">Admin Profile</a>
+          </li>
+          <li>
+            <a href="/home/admin_studentlist">Student List</a>
+          </li>
+          <li>
+            <a href="/home/admin_contact">Contact</a>
+          </li>
+          <li>
+            <a href="/home/logout">Logout</a>
+          </li>
+          <li class="right">
+            <a href="/home/admin_profile">Welcome!
+              <%=user[0].first_name%>&nbsp;
+                <%=user[0].last_name%>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <h3 style="text-align:center">Admin Profile Snapshot</h3>
+
+    <div class="card">
+      <img src="/img/download.jpg" alt="Janet-Morrison Lane" style="width:100%">
+      <h3>
+        <%=user[0].first_name%>&nbsp;
+          <%=user[0].last_name%>
+      </h3>
+      <p class="title">
+        <%=user[0].position%>
+      </p>
+      <p>
+        <%=user[0].alma_mater%>
+      </p>
+      <br>
+      <div>
+        <button class="accordion">Contact</button>
+        <div class="panel">
+          <p>
+            <%=user[0].street%>
+          </p>
+          <p>
+            <%=user[0].state%>
+          </p>
+          <p>
+            <%=user[0].city%>
+          </p>
+          <p>
+            <%=user[0].zip%>
+          </p>
+        </div>
+
+        <button class="accordion">Details</button>
+        <div class="panel">
+          <p>Lorem ipsum...</p>
+        </div>
+      </div>
+    </div>
+    <!-- Content -->
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div>
+      <div class="footer-icons">
+        <a href="#facebook">
+          <i class="fa fa-facebook"></i>
+        </a>
+        <a href="#twitter">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a href="#linkedin">
+          <i class="fa fa-linkedin"></i>
+        </a>
+        <a href="#github">
+          <i class="fa fa-github"></i>
+        </a>
+      </div>
+      <br>
+      <div class="footer-copyright">
+        <p>
+          Eagle Scholar's University &copy; 2018
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    var acc = document.getElementsByClassName("accordion");
+    //console.log(acc);
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>

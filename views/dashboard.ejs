@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Home</title>
+  <!-- External Style Sheet -->
+  <link rel='stylesheet' type='text/css' href='/css/style.css' />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body class="animated fadeInRight">
+  <div class="wrapper">
+    <!-- Header -->
+    <header>
+      <div style="display:inline">
+        <a href="index.html" style="text-decoration:none">
+          <img src="/img/ESU.png" alt="ESU" width="1305" height="400" class="name" style="vertical-align:middle" />
+          <img src="/img/lion.png" alt="Tasby Lion Logo" width="180" height="236" class="logo" style="vertical-align:middle" />
+        </a>
+      </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+      <nav>
+        <ul>
+          <li class="active">
+            <a href="/home/student_dashboard">Home</a>
+          </li>
+          <li>
+            <a href="/home/student_profile">Profile</a>
+          </li>
+          <li>
+            <a href="/home/student_contact">Contact</a>
+          </li>
+          <li>
+            <a href="/home/logout">Logout</a>
+          </li>
+          <li class="right">
+            <a href="/home/student_profile">Welcome!
+              <%=user[0].first_name%>&nbsp;
+                <%=user[0].last_name%>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Content -->
+    <div class="slideshow">
+      <div class="w3-content w3-display-container">
+        <img class="mySlides fade" src="/img/ESU-6.png" style="width:100%">
+        <img class="mySlides fade" src="/img/ESU-2.png" style="width:100%">
+        <img class="mySlides fade" src="/img/ESU-3.png" style="width:100%">
+        <img class="mySlides fade" src="/img/ESU-4.png" style="width:100%">
+        <img class="mySlides fade" src="/img/ESU-5.png" style="width:100%">
+        <img class="mySlides fade" src="/img/ESU-1.png" style="width:100%">
+        <button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
+        <button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
+      </div>
+      <script>
+        var slideIndex = 1;
+        showDivs(slideIndex);
+
+        function plusDivs(n) {
+          showDivs(slideIndex += n);
+        }
+
+        function currentDiv(n) {
+          showDivs(slideIndex = n);
+        }
+
+        function showDivs(n) {
+          var i;
+          var x = document.getElementsByClassName("mySlides");
+          var dots = document.getElementsByClassName("demo");
+          if (n > x.length) {
+            slideIndex = 1
+          }
+          if (n < 1) {
+            slideIndex = x.length
+          }
+          for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+          }
+          for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" w3-white", "");
+          }
+          x[slideIndex - 1].style.display = "block";
+          dots[slideIndex - 1].className += " w3-white";
+        }
+      </script>
+      <script>
+        var myIndex = 0;
+        carousel();
+
+        function carousel() {
+          var i;
+          var x = document.getElementsByClassName("mySlides");
+          for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+          }
+          myIndex++;
+          if (myIndex > x.length) {
+            myIndex = 1
+          }
+          x[myIndex - 1].style.display = "block";
+          setTimeout(carousel, 10000); // Change image every 10 seconds
+        }
+      </script>
+    </div>
+    <div class="index-block">
+      <p id="p-header">
+        ABOUT US
+      </p>
+      <p>
+        Eagle Scholar's University sets out to create a collegiate path for students in low-income areas. These students come from
+        all backgrounds and without Eagle Scholars, they may go down the wrong path. Through Eagle Scholars, these kids can
+        stay off the streets and be a part of a community for higher learning.
+      </p>
+      <br>
+      <p>
+        The students who a part of the program are mostly very young, and introverted. Through Eagle Scholars, they have a means
+        to break out of their shells and make friends with people from backgrounds they otherwise would never speak to. With
+        our website, the kids will be able to reach out to one another outside of the program and stay in touch. With this
+        website, everyone who is a part of Eagle Scholars is family.
+      </p>
+    </div>
+
+    <div class="index-block">
+      <p id="p-header">
+        ANNOUNCEMENTS
+      </p>
+      <table class="announcement">
+        <tr>
+          <td>
+            <img src="/img/profile/avatar.png" alt="Profile Avatar">
+            <p align="center">
+              Avatar
+            </p>
+          </td>
+          <td>
+            No meeting this week. Enjoy y'alls Spring Break!
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <img src="/img/profile/avatar.png" alt="Profile Avatar">
+            <p align="center">
+              Avatar
+            </p>
+          </td>
+          <td>
+            Shine on Eh-Kaw for volunteering to help around during her vacation!
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <img src="/img/profile/avatar.png" alt="Profile Avatar">
+            <p align="center">
+              Avatar
+            </p>
+          </td>
+          <td>
+            Remember to bring back your field trip forms for our next meeting.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <img src="/img/profile/avatar.png" alt="Profile Avatar">
+            <p align="center">
+              Avatar
+            </p>
+          </td>
+          <td>
+            Here is an interesting article:
+            <a href="https://www.nytimes.com/2018/03/17/business/catharine-mackinnon-gretchen-carlson.html?rref=collection%2Fsectioncollection%2Fbusiness&action=click&contentCollection=business&region=rank&module=package&version=highlights&contentPlacement=1&pgtype=sectionfront">Catharine MacKinnon and Gretchen Carlson Have a Few Things to Say</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="bar-link">
+      <a href="/home/student_contact">
+        <p id="p-header">CONTACT US</p>
+      </a>
+    </div>
+  </div>
+  <!-- Footer -->
+  <footer class="footer">
+    <div>
+      <div class="footer-icons">
+        <a href="#facebook">
+          <i class="fa fa-facebook"></i>
+        </a>
+        <a href="#twitter">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a href="#linkedin">
+          <i class="fa fa-linkedin"></i>
+        </a>
+        <a href="#github">
+          <i class="fa fa-github"></i>
+        </a>
+      </div>
+      <br>
+      <div class="footer-copyright">
+        <p>
+          Eagle Scholar's University &copy; 2018
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $("nav ul li").click(function () {
+        $(this).tab('show');
+      });
+    });
+  </script>
+</body>
+
+</html>
