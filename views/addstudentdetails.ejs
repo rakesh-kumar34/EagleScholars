@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student Details</title>
+    <!-- External Style Sheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
+
+    <style>
+        #success_message {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="animated fadeInRight">
+
+    <script>
+        $(document).ready(function () {
+            $('#contact_form').bootstrapValidator({
+                // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    street: {
+                        validators: {
+                            stringLength: {
+                                min: 2,
+                            },
+                            notEmpty: {
+                                message: 'Please enter student street'
+                            }
+                        }
+                    },
+                    city: {
+                        validators: {
+                            stringLength: {
+                                min: 2,
+                            },
+                            notEmpty: {
+                                message: 'Please enter student city'
+                            }
+                        }
+                    },
+                    state: {
+                        validators: {
+                            stringLength: {
+                                min: 2,
+                                max: 20
+                            },
+                            notEmpty: {
+                                message: 'Please enter student state'
+                            }
+                        }
+                    },
+                    zip: {
+                        validators: {
+                            stringLength: {
+                                min: 5,
+                                max: 8
+                            },
+                            notEmpty: {
+                                message: 'Please enter student zip'
+                            }
+                        }
+                    },
+                    interests: {
+                        validators: {
+                            stringLength: {
+                                min: 8,
+                                max: 100
+                            },
+                            notEmpty: {
+                                message: 'Please enter student interests'
+                            }
+                        }
+                    },
+                    house: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Please select student house type'
+                            }
+                        }
+                    },
+                    email: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Please enter your Email Address'
+                            },
+                            emailAddress: {
+                                message: 'Please enter a valid Email Address'
+                            }
+                        }
+                    }
+                }
+            })
+
+        });
+    </script>
+    <div class="container">
+
+        <form class="well form-horizontal" action="/home/addstudentdetails" method="post" id="contact_form" style="margin-top: 25px">
+            <fieldset>
+
+                <!-- Form Name -->
+                <legend>
+                    <center>
+                        <h3>
+                            <b>Student Details Form</b>
+                        </h3>
+                    </center>
+                </legend>
+                <br>
+                <% if (message.length > 0) { %>
+                    <div class="alert alert-success col-sm-12" style="text-align: center">
+                        <%= message %>
+                    </div>
+                <% } %>
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">E-Mail</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-envelope"></i>
+                            </span>
+                            <input name="email" placeholder="E-Mail Address" class="form-control" type="text">
+                        </div>
+                    </div>
+                </div>
+                <!-- Text input-->
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Street</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-user"></i>
+                            </span>
+                            <input name="street" placeholder="Street" class="form-control" type="text">
+                        </div>
+                    </div>
+                </div>
+                <!-- Text input-->
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">City</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-user"></i>
+                            </span>
+                            <input name="city" placeholder="City" class="form-control" type="text">
+                        </div>
+                    </div>
+                </div>
+                <!-- Text input-->
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">State</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-user"></i>
+                            </span>
+                            <input name="state" placeholder="State" class="form-control" type="text">
+                        </div>
+                    </div>
+                </div>
+                <!-- Text input-->
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Zip</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-user"></i>
+                            </span>
+                            <input name="zip" placeholder="Zip" class="form-control" type="text">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">House</label>
+                    <div class="col-md-4 selectContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-list"></i>
+                            </span>
+                            <select name="house" class="form-control selectpicker">
+                                <option value="">--Select--</option>
+                                <option>Malala</option>
+                                <option>Mandela</option>
+                                <option>King</option>
+                                <option>MG</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text input-->
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Interests</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-user"></i>
+                            </span>
+                            <textarea name="interests" placeholder="Enter student interests..." class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label"></label>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-warning">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSUBMIT
+                            <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        </button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+    </div>
+    <!-- /.container -->
+
+</body>
+
+</html>
