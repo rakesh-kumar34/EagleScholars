@@ -53,6 +53,8 @@ app.get('/home/admin_contact', user.admincontact); //call for admin contact
 app.get('/home/admin_studentlist', user.adminstudentlist); //call for admin contact
 app.get('/home/addstudent', user.addstudent); //call for admin contact
 app.post('/home/signup', user.signup); //call for signup student post 
+app.post('/home/signup', user.signup); //call for signup student post 
+app.post('/home/addstudentdetails', user.addstudentdetails); //call for signup student post 
 app.post('/home/studentfeedback', user.studentfeedback); //call for student feedback post 
 
 // Server

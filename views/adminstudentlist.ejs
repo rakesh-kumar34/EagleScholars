@@ -30,6 +30,17 @@
             margin-bottom: 10px !important;
         }
 
+        .msgalert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            color: #3c763d;
+            background-color: #dff0d8;
+            width: 50%;
+            margin: 0 auto;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -85,65 +96,66 @@
         <!-- Content -->
         <div id="studentTable">
             <form>
-                <% if (message.length > 0) { %>
-                    <div class="">
-                        <%= message %>
-                    </div>
-                    <% } %>
-                        <div class="table-responsive">
-                            <table cellspacing="0" class="cell-border hover stripe" style="width:100%" id="slist">
-                                <thead style="top:0; background-color:lightgrey;">
-                                    <tr>
-                                        <th>Student ID</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Email</th>
-                                        <th>Mobile</th>
-                                        <th>School</th>
-                                        <th>Grade</th>
-                                        <th>Edit / Delete</th>
-                                    </tr>
-                                </thead>
-                                <tbody style="text-align: center">
-                                    <% for (var i = 0; i < user.length; i++) { %>
-                                        <tr>
-                                            <td>
-                                                <%= user[i].studentId %>
-                                            </td>
-                                            <td>
-                                                <%= user[i].first_name %>
-                                            </td>
-                                            <td>
-                                                <%= user[i].last_name %>
-                                            </td>
-                                            <td>
-                                                <%= user[i].username %>
-                                            </td>
-                                            <td>
-                                                <%= user[i].mobile %>
-                                            </td>
-                                            <td>
-                                                <%= user[i].school %>
-                                            </td>
-                                            <td>
-                                                <%= user[i].grade %>
-                                            </td>
-                                            <td>
-                                                <button id="edit">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                                <button href="#github">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <% } %>
-                                </tbody>
-                            </table>
-                        </div>
+                <div class="table-responsive">
+                    <table cellspacing="0" class="cell-border hover stripe" style="width:100%" id="slist">
+                        <thead style="top:0; background-color:lightgrey;">
+                            <tr>
+                                <th>Student ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                                <th>School</th>
+                                <th>Grade</th>
+                                <th>Edit / Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody style="text-align: center">
+                            <% for (var i = 0; i < user.length; i++) { %>
+                                <tr>
+                                    <td>
+                                        <%= user[i].studentId %>
+                                    </td>
+                                    <td>
+                                        <%= user[i].first_name %>
+                                    </td>
+                                    <td>
+                                        <%= user[i].last_name %>
+                                    </td>
+                                    <td>
+                                        <%= user[i].username %>
+                                    </td>
+                                    <td>
+                                        <%= user[i].mobile %>
+                                    </td>
+                                    <td>
+                                        <%= user[i].school %>
+                                    </td>
+                                    <td>
+                                        <%= user[i].grade %>
+                                    </td>
+                                    <td>
+                                        <button id="edit">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <button href="#github">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <% } %>
+                        </tbody>
+                    </table>
+                </div>
             </form>
         </div>
+        <br>
+        <% if (message.length > 0) { %>
+            <div class="msgalert">
+                <%= message %>
+            </div>
+        <% } %>
         <br>
         <div style="margin: 0; text-align: center; margin-bottom: 20px">
             <a href="/home/addstudent">

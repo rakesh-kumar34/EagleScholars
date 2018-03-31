@@ -189,9 +189,6 @@ header {
 
 .index-block {
 	padding: 2.5%;
-	/* height: 350px; */
-	background-color: #fff;
-	/* border-radius: 8px; */
 	overflow: auto;
 }
 
@@ -505,6 +502,6 @@ input[type=password] {
 		width: 300px;
 	}
 	#loginbox {
-		width: 90% !important;
+		width: 90%;
 	}
 }

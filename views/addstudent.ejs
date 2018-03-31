@@ -20,6 +20,11 @@
         #success_message {
             display: none;
         }
+
+        .sub {
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 
@@ -41,7 +46,7 @@
                                 min: 2,
                             },
                             notEmpty: {
-                                message: 'Please enter your First Name'
+                                message: 'Please enter student First Name'
                             }
                         }
                     },
@@ -58,7 +63,7 @@
                                 min: 2,
                             },
                             notEmpty: {
-                                message: 'Please enter your Last Name'
+                                message: 'Please enter student Last Name'
                             }
                         }
                     },
@@ -69,7 +74,7 @@
                                 max: 2
                             },
                             notEmpty: {
-                                message: 'Please enter your Grade'
+                                message: 'Please enter student Grade'
                             }
                         }
                     },
@@ -79,7 +84,7 @@
                                 min: 8,
                             },
                             notEmpty: {
-                                message: 'Please enter your School'
+                                message: 'Please enter student School'
                             }
                         }
                     },
@@ -89,7 +94,7 @@
                                 min: 8,
                             },
                             notEmpty: {
-                                message: 'Please enter your Password'
+                                message: 'Please enter student Password'
                             }
                         }
                     },
@@ -99,14 +104,14 @@
                                 min: 8,
                             },
                             notEmpty: {
-                                message: 'Please confirm your Password'
+                                message: 'Please confirm student Password'
                             }
                         }
                     },
                     email: {
                         validators: {
                             notEmpty: {
-                                message: 'Please enter your Email Address'
+                                message: 'Please enter student Email Address'
                             },
                             emailAddress: {
                                 message: 'Please enter a valid Email Address'
@@ -120,14 +125,14 @@
                                 max: 12
                             },
                             notEmpty: {
-                                message: 'Please enter your Contact No.'
+                                message: 'Please enter student Contact No.'
                             }
                         }
                     },
                     gender: {
                         validators: {
                             notEmpty: {
-                                message: 'Please select your Gender'
+                                message: 'Please select student Gender'
                             }
                         }
                     },
@@ -144,9 +149,9 @@
                 <!-- Form Name -->
                 <legend>
                     <center>
-                        <h2>
-                            <b>Registration Form</b>
-                        </h2>
+                        <h3>
+                            <b>Student Registration Form</b>
+                        </h3>
                     </center>
                 </legend>
                 <br>
@@ -289,17 +294,15 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Button -->
-                <div class="form-group">
-                    <label class="col-md-4 control-label"></label>
-                    <div class="col-md-4">
-                        <button type="submit" class="btn btn-warning">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSUBMIT
-                            <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        </button>
-                    </div>
+                <br>
+                <div class="row sub">
+                    <button type="submit" class="btn btn-warning col-md-3 col-sm-8" id="next">NEXT</button>
                 </div>
-
+                <br>
+                <!-- Cancel Button -->
+                <div class="row sub">
+                    <button type="submit" class="btn btn-warning col-md-3 col-sm-8" id="cancel">CANCEL</button>
+                </div>
             </fieldset>
         </form>
     </div>
