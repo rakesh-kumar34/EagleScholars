@@ -6,59 +6,72 @@
   <title>Profile</title>
   <!-- External Style Sheet -->
   <link rel='stylesheet' type='text/css' href='/css/style.css' />
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="/css/w3.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
-      .card {
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        max-width: 600px;
-        margin: auto;
-        text-align: center;
-        font-family: arial;
-        margin-bottom: 25px;
-      }
-  
-      .title {
-        color: grey;
-        font-size: 18px;
-      }
-  
-      /* Style the buttons that are used to open and close the accordion panel */
-  
-      .accordion {
-        width: 100%;
-        transition: 0.4s;
-        display: inline-block;
-        outline: none;
-      }
-  
-      /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-  
-      .card .active:hover {
-        background-color: #ccc;
-      }
-  
-      .accordion:after {
-        content: '\002B';
-        font-weight: bold;
-        float: right;
-        margin-left: 5px;
-      }
-  
-      .card .active:after {
-        content: "\2212";
-      }
-  
-      .panel {
-        padding: 0 18px;
-        background-color: white;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.2s ease-out;
-      }
-    </style>
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      max-width: 600px;
+      margin: auto;
+      text-align: center;
+      font-family: arial;
+      margin-bottom: 25px;
+    }
+
+    .title {
+      color: grey;
+      font-size: 18px;
+    }
+
+    /* Style the buttons that are used to open and close the accordion panel */
+
+    .accordion {
+      width: 100%;
+      transition: 0.4s;
+      display: inline-block;
+      outline: none;
+      border-bottom: 1px solid grey;
+    }
+
+    /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+
+    .card .active:hover {
+      background-color: #ccc;
+    }
+
+    .accordion:after {
+      content: '\002B';
+      font-weight: bold;
+      float: right;
+      margin-left: 5px;
+    }
+
+    .card .active:after {
+      content: "\2212";
+    }
+
+    .panel {
+      padding: 0 18px;
+      background-color: white;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.2s ease-out;
+    }
+
+    table,
+    td {
+      border-bottom: 1px solid lightgray;
+      border-collapse: collapse;
+      padding: 5px;
+      text-align: left;
+    }
+
+    .attr {
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body class="animated fadeInRight">
@@ -91,7 +104,8 @@
           </li>
           <li class="right">
             <a href="/home/student_profile">Welcome!
-              <%=user[0].first_name%>&nbsp;<%=user[0].last_name%>
+              <%=user[0].first_name%>&nbsp;
+                <%=user[0].last_name%>
             </a>
           </li>
         </ul>
@@ -106,7 +120,8 @@
           <%=user[0].last_name%>
       </h3>
       <p class="title">
-        Grade: <%=user[0].grade%>
+        Grade:
+        <%=user[0].grade%>
       </p>
       <p>
         <%=user[0].school%>
@@ -115,25 +130,50 @@
       <div>
         <button class="accordion">Contact</button>
         <div class="panel">
-          <p>
-            <%=user[0].street%>
-          </p>
-          <p>
-            <%=user[0].state%>
-          </p>
-          <p>
-            <%=user[0].city%>
-          </p>
-          <p>
-            <%=user[0].zip%>
-          </p>
+          <table>
+            <tr>
+              <td class="attr">Street:</td>
+              <td>
+                <%=user[0].street%>
+              </td>
+            </tr>
+            <tr>
+              <td class="attr">State:</td>
+              <td>
+                <%=user[0].state%>
+              </td>
+            </tr>
+            <tr>
+              <td class="attr">City:</td>
+              <td>
+                <%=user[0].city%>
+              </td>
+            </tr>
+            <tr>
+              <td class="attr">Zip:</td>
+              <td>
+                <%=user[0].zip%>
+              </td>
+            </tr>
+          </table>
         </div>
 
         <button class="accordion">Details</button>
         <div class="panel">
-          <p>House: <%=user[0].house%></p>
-          <br>
-          <p>Interests: <%=user[0].interests%></p>
+          <table>
+            <tr>
+              <td class="attr">House:</td>
+              <td>
+                <%=user[0].house%>
+              </td>
+            </tr>
+            <tr>
+              <td class="attr">Interests:</td>
+              <td>
+                <%=user[0].interests%>
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
@@ -166,22 +206,22 @@
     </div>
   </footer>
   <script>
-      var acc = document.getElementsByClassName("accordion");
-      //console.log(acc);
-      var i;
-  
-      for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function () {
-          this.classList.toggle("active");
-          var panel = this.nextElementSibling;
-          if (panel.style.maxHeight) {
-            panel.style.maxHeight = null;
-          } else {
-            panel.style.maxHeight = panel.scrollHeight + "px";
-          }
-        });
-      }
-    </script>
+    var acc = document.getElementsByClassName("accordion");
+    //console.log(acc);
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    }
+  </script>
 </body>
 
 </html>

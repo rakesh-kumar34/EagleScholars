@@ -13,7 +13,7 @@ const db_local = {
   database: 'studentdash'
 };
 
-const connection = mysql.createConnection(db_config);
+const connection = mysql.createConnection(db_local);
 
 connection.connect((err) => {
   if(err) {

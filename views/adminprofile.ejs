@@ -6,7 +6,7 @@
   <title>Profile</title>
   <!-- External Style Sheet -->
   <link rel='stylesheet' type='text/css' href='/css/style.css' />
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="/css/w3.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -33,6 +33,7 @@
       transition: 0.4s;
       display: inline-block;
       outline: none;
+      border-bottom: 1px solid grey;
     }
 
     /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
@@ -58,6 +59,18 @@
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.2s ease-out;
+    }
+
+    table,
+    td {
+      border-bottom: 1px solid lightgray;
+      border-collapse: collapse;
+      padding: 5px;
+      text-align: left;
+    }
+
+    .attr {
+      font-weight: bold;
     }
   </style>
 </head>
@@ -121,23 +134,50 @@
       <div>
         <button class="accordion">Contact</button>
         <div class="panel">
-          <p>
-            <%=user[0].street%>
-          </p>
-          <p>
-            <%=user[0].state%>
-          </p>
-          <p>
-            <%=user[0].city%>
-          </p>
-          <p>
-            <%=user[0].zip%>
-          </p>
+          <table>
+            <tr>
+              <td class="attr">Street:</td>
+              <td>
+                <%=user[0].street%>
+              </td>
+            </tr>
+            <tr>
+              <td class="attr">State:</td>
+              <td>
+                <%=user[0].state%>
+              </td>
+            </tr>
+            <tr>
+              <td class="attr">City:</td>
+              <td>
+                <%=user[0].city%>
+              </td>
+            </tr>
+            <tr>
+              <td class="attr">Zip:</td>
+              <td>
+                <%=user[0].zip%>
+              </td>
+            </tr>
+          </table>
         </div>
 
-        <button class="accordion">Details</button>
+        <button class="accordion">Additional Details</button>
         <div class="panel">
-          <p>Lorem ipsum...</p>
+          <table>
+            <tr>
+              <td class="attr">Mobile:</td>
+              <td>
+                <%=user[0].mobile%>
+              </td>
+            </tr>
+            <tr>
+              <td class="attr">Admin ID:</td>
+              <td>
+                <%=user[0].adminId%>
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
