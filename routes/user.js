@@ -16,9 +16,12 @@ exports.signup = function (req, res) {
         var mob = post.contact_no;
         var school = post.school;
         var grade = post.grade;
+        var imageurl = post.image;
+        var dob = post.dob;
+
         var studentId = 0;
 
-        var sql = "INSERT INTO `student`(`studentId`, `first_name`, `last_name`, `middle_name`, `mobile`, `username`, `pass`, `gender`,`school`, `grade`) VALUES ('" + studentId + "','" + fname + "','" + lname + "','" + mname + "','" + mob + "','" + email + "','" + hashedPassword + "','" + gender + "','" + school + "','" + grade + "')";
+        var sql = "INSERT INTO `student`(`studentId`, `first_name`, `last_name`, `middle_name`, `mobile`, `username`, `pass`, `gender`,`school`, `grade`, `dob`, `image_url`) VALUES ('" + studentId + "','" + fname + "','" + lname + "','" + mname + "','" + mob + "','" + email + "','" + hashedPassword + "','" + gender + "','" + school + "','" + grade + "','" + dob + "','" + imageurl + "')";
 
         db.query(sql, (err, data) => {
             if (err) throw err;
@@ -78,11 +81,11 @@ exports.studentfeedback = function (req, res) {
     var message = '';
     if (req.method == "POST") {
         var post = req.body;
-        var name = post.student - name;
-        var email = post.student - email;
-        var msg = post.student - msg;
+        var name = post['student-name'];
+        var email = post['student-email'];
+        var msg = post['student-msg'];
         var feedbackId = 0;
-        //console.log(name);
+        console.log(post);
         var sql = "INSERT INTO `student_feedback`(`feedbackId`, `student_name`, `student_email`, `student_feedback`) VALUES ('" + feedbackId + "','" + name + "','" + email + "','" + msg + "')";
 
         db.query(sql, (err, data) => {
@@ -96,11 +99,47 @@ exports.studentfeedback = function (req, res) {
         res.render('contact.ejs');
     }
 };
+//---------------------------------------------delete a student------------------------------------------------------
+exports.deletestudent = function (req, res) {
+    var message = '';
+    if (req.method == "POST") {
+        var post = req.body;
+        var userId = post.sId;
+        console.log(userId);
+        var sql = "DELETE from `student_details` WHERE `fk_studentId`='" + userId + "'";
+        var sql2 = "DELETE FROM `student` WHERE `studentId`='" + userId + "'";
 
+        db.query(sql, (err, data) => {
+            if (err) throw err;
+            db.query(sql2, (err, data) => {
+                if (err) throw err;
+                console.log("Inside delete student");
+                message = `Student records with StudentId: ${userId} have been deleted successfully.`;
+                res.redirect('/home/admin_studentlist/?msg=' + message);
+            });
+        });
+    } else {
+        res.render('adminstudentlist.ejs');
+    }
+};
+//---------------------------------------------update a student------------------------------------------------------
+exports.updatestudent = function (req, res) {
+    var message = '';
+    if (req.method == "POST") {
+        var post = req.body;
+        var userId = post.sId;
+        console.log("Inside Edit Student:" + userId);
+        res.render('updatestudent.ejs', {
+            data: post
+        });
+    } else {
+        res.render('adminstudentlist.ejs');
+    }
+};
 //-----------------------------------------------common login page call------------------------------------------------------
 exports.login = function (req, res) {
     var message = '';
-    
+
     var sess = req.session;
     if (req.method == "POST") {
         var post = req.body;
@@ -209,7 +248,9 @@ exports.admindashboard = function (req, res, next) {
 exports.logout = function (req, res) {
     var message = "Logged out successfully."
     req.session.destroy(function (err) {
-        res.render("index.ejs", {message: message});
+        res.render("index.ejs", {
+            message: message
+        });
     })
 };
 //--------------------------------render student profile after login--------------------------------
@@ -221,7 +262,7 @@ exports.studentprofile = function (req, res) {
         res.redirect("/login");
         return;
     }
-    var sql = "SELECT studentId, first_name, last_name, mobile, username, gender, school, grade, house, interests, street, city, state, zip FROM `student` INNER JOIN `student_details` WHERE `studentId` = `fk_studentId` AND `studentId`='" + userId + "'";
+    var sql = "SELECT studentId, first_name, last_name, mobile, username, gender, school, grade, house, interests, street, city, state, zip, dob, image_url FROM `student` INNER JOIN `student_details` WHERE `studentId` = `fk_studentId` AND `studentId`='" + userId + "'";
     db.query(sql, function (err, data) {
         console.log(data);
         if (err) throw err;
@@ -263,6 +304,7 @@ exports.adminprofile = function (req, res) {
         res.render('adminprofile.ejs', {
             user: data
         });
+        console.log(data[0]);
     });
 };
 
@@ -293,20 +335,25 @@ exports.adminstudentlist = function (req, res) {
     if (req.query.msg != null) {
         message = req.query.msg;
     }
+    var sql = "SELECT * FROM `admin` WHERE `adminId`='" + userId + "'";
+    var sql2 = "SELECT * from `student`";
 
+    db.query(sql, function (err, admindata) {
+        db.query(sql2, function (err, data) {
+            //console.log("111111111111111");
+            res.render('adminstudentlist.ejs', {
+                user: data,
+                message: message,
+                adminData: admindata
+            });
+        });
+    });
     if (userId == null) {
         res.redirect("/login");
         return;
     }
 
-    var sql = "SELECT * from `student`";
-    db.query(sql, function (err, data) {
-        //console.log("111111111111111");
-        res.render('adminstudentlist.ejs', {
-            user: data,
-            message: message
-        });
-    });
+
 
 };
 //--------------------------------render admin addstudent page after login--------------------------------
@@ -323,6 +370,28 @@ exports.addstudent = function (req, res) {
     db.query(sql, function (err, data) {
         res.render('addstudent.ejs', {
             user: data
+        });
+    });
+
+};
+
+//--------------------------------render admin studentlist page after cancel--------------------------------
+exports.cancel = function (req, res) {
+
+    var userId = req.session.userId;
+    var message = '';
+
+    if (userId == null) {
+        res.redirect("/login");
+        return;
+    }
+
+    var sql = "SELECT * from `student`";
+    db.query(sql, function (err, data) {
+        //console.log("111111111111111");
+        res.render('adminstudentlist.ejs', {
+            user: data,
+            message: message
         });
     });
 

@@ -53,9 +53,11 @@ app.get('/home/admin_contact', user.admincontact); //call for admin contact
 app.get('/home/admin_studentlist', user.adminstudentlist); //call for admin contact
 app.get('/home/addstudent', user.addstudent); //call for admin contact
 app.post('/home/signup', user.signup); //call for signup student post 
-app.post('/home/signup', user.signup); //call for signup student post 
+app.post('/home/cancel', user.cancel); //call for cancel student post 
 app.post('/home/addstudentdetails', user.addstudentdetails); //call for signup student post 
 app.post('/home/studentfeedback', user.studentfeedback); //call for student feedback post 
+app.post('/home/deletestudent', user.deletestudent); //call for student feedback post 
+app.post('/home/updatestudent', user.updatestudent); //call for student feedback post 
 
 // Server
 app.listen(port, () => {

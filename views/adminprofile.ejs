@@ -80,7 +80,7 @@
     <!-- Header -->
     <header>
       <div style="display:inline">
-        <a href="index.html" style="text-decoration:none">
+        <a href="/home/admin_dashboard" style="text-decoration:none">
           <img src="/img/ESU.png" alt="ESU" width="1305" height="400" class="name" style="vertical-align:middle" />
           <img src="/img/lion.png" alt="Tasby Lion Logo" width="180" height="236" class="logo" style="vertical-align:middle" />
         </a>
@@ -119,7 +119,7 @@
     <h3 style="text-align:center">Admin Profile Snapshot</h3>
 
     <div class="card">
-      <img src="/img/download.jpg" alt="Janet-Morrison Lane" style="width:100%">
+      <img src="<%=user[0].image%>" alt="Janet-Morrison Lane" style="width:100%">
       <h3>
         <%=user[0].first_name%>&nbsp;
           <%=user[0].last_name%>
@@ -169,6 +169,18 @@
               <td class="attr">Mobile:</td>
               <td>
                 <%=user[0].mobile%>
+              </td>
+            </tr>
+            <tr>
+              <td class="attr">DOB:</td>
+              <td>
+                <%=user[0].dob%>
+              </td>
+            </tr>
+            <tr>
+              <td class="attr">Gender:</td>
+              <td>
+                <%=user[0].gender%>
               </td>
             </tr>
             <tr>

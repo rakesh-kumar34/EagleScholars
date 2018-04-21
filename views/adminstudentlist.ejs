@@ -16,7 +16,7 @@
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src=" https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
 
-   
+
     <style>
         #addStudent {
             max-width: 40%;
@@ -44,6 +44,10 @@
             margin: 0 auto;
             text-align: center;
         }
+
+        .editdelete {
+            display: inline-flex;
+        }
     </style>
 </head>
 
@@ -56,39 +60,14 @@
                 responsive: true,
                 fixedHeader: true
             });
-
-            $("#delete").click(function (event) {
-                event.preventDefault(); //prevent default action 
-                var post_url = $(this).attr("action"); //get form action url
-                var request_method = $(this).attr("method"); //get form GET/POST method
-                var form_data = $(this).serialize(); //Encode form elements for submission
-                console.log(form_data);
-                $.ajax({
-                    url: post_url,
-                    type: request_method,
-                    data: form_data
-                }).done(function (response) {
-                    // Clear feedback form before alert
-                    $("#name").val('');
-                    $("#email").val('');
-                    $("#msg").val('');
-
-                    if (response.length > 0) {
-                        alert(response);
-                    } else {
-                        alert("Error in recording feedback");
-                    }
-                    //console.log("success");
-                });
-            });
         });
     </script>
-    </script>
+
     <div class="wrapper">
         <!-- Header -->
         <header>
             <div style="display:inline">
-                <a href="index.html" style="text-decoration:none">
+                <a href="/home/admin_dashboard" style="text-decoration:none">
                     <img src="/img/ESU.png" alt="ESU" width="1305" height="400" class="name" style="vertical-align:middle" />
                     <img src="/img/lion.png" alt="Tasby Lion Logo" width="180" height="236" class="logo" style="vertical-align:middle" />
                 </a>
@@ -115,7 +94,8 @@
                         <a href="/home/logout">Logout</a>
                     </li>
                     <li class="right">
-                        <a href="/home/admin_profile">Welcome!
+                        <a href="/home/admin_profile">Welcome! <%=adminData[0].first_name%>&nbsp;
+                            <%=adminData[0].last_name%>
                         </a>
                     </li>
                 </ul>
@@ -163,15 +143,25 @@
                                     <td>
                                         <%= user[i].grade %>
                                     </td>
-                                    <td>
-                                        <form id="updateForm">
-                                            <a href="" id="edit">
+                                    <td class="editdelete">
+                                        <form id="updateForm" method="post" action="/home/updatestudent">
+                                            <input type="hidden" name="sId" value="<%= user[i].studentId %>">
+                                            <input type="hidden" name="fName" value="<%= user[i].first_name %>">
+                                            <input type="hidden" name="lName" value="<%= user[i].last_name %>">
+                                            <input type="hidden" name="email" value="<%= user[i].username %>">
+                                            <input type="hidden" name="mobile" value="<%= user[i].mobile %>">
+                                            <input type="hidden" name="school" value="<%= user[i].school %>">
+                                            <input type="hidden" name="grade" value="<%= user[i].grade %>">
+                                            <button type="submit" id="edit<%= i %>">
                                                 <i class="fa fa-edit"></i>
-                                            </a>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;
-                                            <a href="/home/deletestudent" id="delete">
+                                            </button>
+                                        </form>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <form id="deleteForm" method="post" action="/home/deletestudent">
+                                            <input type="hidden" name="sId" value="<%= user[i].studentId %>">
+                                            <button type="submit" id="delete<%= i %>">
                                                 <i class="fa fa-trash"></i>
-                                            </a>
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>

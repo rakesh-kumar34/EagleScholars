@@ -3,7 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Student</title>
+    <title>Update Student Information</title>
     <!-- External Style Sheet -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
             justify-content: center;
         }
     </style>
-
+    
 </head>
 
 <body class="animated fadeInRight">
@@ -48,13 +48,6 @@
                             },
                             notEmpty: {
                                 message: 'Please enter student First Name'
-                            }
-                        }
-                    },
-                    middle_name: {
-                        validators: {
-                            stringLength: {
-                                min: 2,
                             }
                         }
                     },
@@ -89,26 +82,6 @@
                             }
                         }
                     },
-                    password: {
-                        validators: {
-                            stringLength: {
-                                min: 8,
-                            },
-                            notEmpty: {
-                                message: 'Please enter student Password'
-                            }
-                        }
-                    },
-                    confirm_password: {
-                        validators: {
-                            stringLength: {
-                                min: 8,
-                            },
-                            notEmpty: {
-                                message: 'Please confirm student Password'
-                            }
-                        }
-                    },
                     email: {
                         validators: {
                             notEmpty: {
@@ -121,7 +94,7 @@
                     },
                     contact_no: {
                         validators: {
-                            phone: {
+                            stringLength: {
                                 min: 10,
                                 max: 12
                             },
@@ -129,33 +102,7 @@
                                 message: 'Please enter student Contact No.'
                             }
                         }
-                    },
-                    gender: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Please select student Gender'
-                            }
-                        }
-                    },
-                    dob: {
-                        validators: {
-                            date: {
-                                format: 'MM/DD/YYYY',
-                                message: 'The value is not a valid date'
-                            },
-
-                            notEmpty: {
-                                message: 'Please enter student DOB in mm/dd/yyyy'
-                            }
-                        }
-                    },
-                    image: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Please enter image url if available'
-                            }
-                        }
-                    },
+                    }
                 }
             })
 
@@ -163,19 +110,19 @@
     </script>
     <div class="container">
 
-        <form class="well form-horizontal" action="/home/signup" method="post" id="contact_form" style="margin-top: 25px">
+        <form class="well form-horizontal" action="#" method="post" id="editForm" style="margin-top: 25px">
             <fieldset>
 
                 <!-- Form Name -->
                 <legend>
                     <center>
                         <h3>
-                            <b>Student Registration Form</b>
+                            <b>Update Student Information</b>
                         </h3>
                     </center>
                 </legend>
                 <br>
-
+                <input type="hidden" value="<%=data.sId %>"
                 <!-- Text input-->
 
                 <div class="form-group">
@@ -185,20 +132,7 @@
                             <span class="input-group-addon">
                                 <i class="glyphicon glyphicon-user"></i>
                             </span>
-                            <input name="first_name" placeholder="First Name" class="form-control" type="text">
-                        </div>
-                    </div>
-                </div>
-                <!-- Text input-->
-
-                <div class="form-group">
-                    <label class="col-md-4 control-label">Middle Name</label>
-                    <div class="col-md-4 inputGroupContainer">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="glyphicon glyphicon-user"></i>
-                            </span>
-                            <input name="middle_name" placeholder="Middle Name" class="form-control" type="text">
+                            <input name="first_name" value="<%=data.fName %>" class="form-control" type="text">
                         </div>
                     </div>
                 </div>
@@ -211,23 +145,7 @@
                             <span class="input-group-addon">
                                 <i class="glyphicon glyphicon-user"></i>
                             </span>
-                            <input name="last_name" placeholder="Last Name" class="form-control" type="text">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-md-4 control-label">Gender</label>
-                    <div class="col-md-4 selectContainer">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="glyphicon glyphicon-list"></i>
-                            </span>
-                            <select name="gender" class="form-control selectpicker">
-                                <option value="">--Select--</option>
-                                <option>Male</option>
-                                <option>Female</option>
-                            </select>
+                            <input name="last_name" value="<%=data.lName %>" class="form-control" type="text">
                         </div>
                     </div>
                 </div>
@@ -241,7 +159,7 @@
                             <span class="input-group-addon">
                                 <i class="glyphicon glyphicon-user"></i>
                             </span>
-                            <input name="school" placeholder="School" class="form-control" type="text">
+                            <input name="school" value="<%=data.school %>" class="form-control" type="text">
                         </div>
                     </div>
                 </div>
@@ -255,10 +173,11 @@
                             <span class="input-group-addon">
                                 <i class="glyphicon glyphicon-user"></i>
                             </span>
-                            <input name="grade" placeholder="Grade" class="form-control" type="text">
+                            <input name="grade" value="<%=data.grade %>" class="form-control" type="text">
                         </div>
                     </div>
                 </div>
+
                 <!-- Text input-->
                 <div class="form-group">
                     <label class="col-md-4 control-label">E-Mail</label>
@@ -267,48 +186,7 @@
                             <span class="input-group-addon">
                                 <i class="glyphicon glyphicon-envelope"></i>
                             </span>
-                            <input name="email" placeholder="E-Mail Address" class="form-control" type="text">
-                        </div>
-                    </div>
-                </div>
-                <!-- Text input-->
-
-                <div class="form-group">
-                    <label class="col-md-4 control-label">Password</label>
-                    <div class="col-md-4 inputGroupContainer">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="glyphicon glyphicon-user"></i>
-                            </span>
-                            <input name="password" placeholder="Password" class="form-control" type="password">
-                        </div>
-                    </div>
-                </div>
-                <!-- Text input-->
-
-                <div class="form-group">
-                    <label class="col-md-4 control-label">Confirm Password</label>
-                    <div class="col-md-4 inputGroupContainer">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="glyphicon glyphicon-user"></i>
-                            </span>
-                            <input name="confirm_password" placeholder="Confirm Password" class="form-control" type="password">
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- Text input-->
-
-                <div class="form-group">
-                    <label class="col-md-4 control-label">Date of Birth</label>
-                    <div class="col-md-4 inputGroupContainer">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="glyphicon glyphicon-calendar"></i>
-                            </span>
-                            <input name="dob" placeholder="mm/dd/yyyy" class="form-control" type="text">
+                            <input name="email" value="<%=data.email %>" class="form-control" type="text">
                         </div>
                     </div>
                 </div>
@@ -322,27 +200,13 @@
                             <span class="input-group-addon">
                                 <i class="glyphicon glyphicon-earphone"></i>
                             </span>
-                            <input name="contact_no" placeholder="xxx-xxx-xxxx" class="form-control" type="text">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Text input-->
-
-                <div class="form-group">
-                    <label class="col-md-4 control-label">Image URL</label>
-                    <div class="col-md-4 inputGroupContainer">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="glyphicon glyphicon-user"></i>
-                            </span>
-                            <input name="image" placeholder="Enter Image Link" class="form-control" type="text">
+                            <input name="contact_no" value="<%=data.mobile %>" class="form-control" type="text">
                         </div>
                     </div>
                 </div>
                 <br>
                 <div class="row sub">
-                    <button type="submit" class="btn btn-warning col-md-3 col-sm-8" id="next">NEXT</button>
+                    <button type="submit" class="btn btn-warning col-md-3 col-sm-8" id="next">UPDATE</button>
                 </div>
                 <br>
                 <!-- Cancel Button -->
