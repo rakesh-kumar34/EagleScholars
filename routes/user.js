@@ -18,21 +18,26 @@ exports.signup = function (req, res) {
         var grade = post.grade;
         var imageurl = post.image;
         var dob = post.dob;
+        var cancelFlag = post.cancelFlag;
 
         var studentId = 0;
+        if (cancelFlag === 'Y') {
+            res.redirect('/home/admin_studentlist');
+        } else {
+            var sql = "INSERT INTO `student`(`studentId`, `first_name`, `last_name`, `middle_name`, `mobile`, `username`, `pass`, `gender`,`school`, `grade`, `dob`, `image_url`) VALUES ('" + studentId + "','" + fname + "','" + lname + "','" + mname + "','" + mob + "','" + email + "','" + hashedPassword + "','" + gender + "','" + school + "','" + grade + "','" + dob + "','" + imageurl + "')";
 
-        var sql = "INSERT INTO `student`(`studentId`, `first_name`, `last_name`, `middle_name`, `mobile`, `username`, `pass`, `gender`,`school`, `grade`, `dob`, `image_url`) VALUES ('" + studentId + "','" + fname + "','" + lname + "','" + mname + "','" + mob + "','" + email + "','" + hashedPassword + "','" + gender + "','" + school + "','" + grade + "','" + dob + "','" + imageurl + "')";
-
-        db.query(sql, (err, data) => {
-            if (err) throw err;
-            console.log("Inside signup");
-            //console.log(data);
-            message = `Kindly enter student details for student - '${fname} ${lname}'.`;
-            res.render('addstudentdetails.ejs', {
-                message: message
+            db.query(sql, (err, data) => {
+                if (err) throw err;
+                console.log("Inside signup");
+                //console.log(data);
+                message = `Kindly enter student details for student - '${fname} ${lname}'.`;
+                res.render('addstudentdetails.ejs', {
+                    message: message
+                });
+                //res.redirect('/home/admin_studentlist');
             });
-            //res.redirect('/home/admin_studentlist');
-        });
+        }
+
     } else {
         res.render('addstudent.ejs');
     }
@@ -122,16 +127,50 @@ exports.deletestudent = function (req, res) {
         res.render('adminstudentlist.ejs');
     }
 };
+//--------------------------------edit button click on studentlist page--------------------------------
+exports.editstudent = function (req, res) {
+
+    var message = '';
+    if (req.method == "POST") {
+        var post = req.body;
+        var userId = post.sId;
+        console.log("Inside Edit Click:" + userId);
+        res.render('updatestudent.ejs', {
+            data: post
+        });
+    } else {
+        res.render('adminstudentlist.ejs');
+    }
+};
+
 //---------------------------------------------update a student------------------------------------------------------
 exports.updatestudent = function (req, res) {
     var message = '';
     if (req.method == "POST") {
         var post = req.body;
         var userId = post.sId;
-        console.log("Inside Edit Student:" + userId);
-        res.render('updatestudent.ejs', {
-            data: post
-        });
+        var fname = post.first_name;
+        var lname = post.last_name;
+        var school = post.school;
+        var grade = post.grade;
+        var email = post.email;
+        var mobile = post.contact_no;
+        var cancelFlag = post.cancelFlag;
+        //console.log(post);
+
+        if (cancelFlag === 'Y') {
+            res.redirect('/home/admin_studentlist');
+        } else {
+            var sql = "UPDATE `student` SET `first_name`='" + fname + "', `last_name`='" + lname + "',`mobile`='" + mobile + "',`username`='" + email + "',`school`='" + school + "',`grade`='" + grade + "' WHERE `studentId`='" + userId + "'";
+            console.log(sql);
+            db.query(sql, (err, data) => {
+                if (err) throw err;
+                console.log("Inside Edit Student:" + userId);
+                message = `Student information successfully updated for student - '${fname} ${lname}'.`;
+                res.redirect('/home/admin_studentlist/?msg=' + message);
+            });
+        }
+
     } else {
         res.render('adminstudentlist.ejs');
     }

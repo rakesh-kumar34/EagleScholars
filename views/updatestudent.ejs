@@ -26,7 +26,7 @@
             justify-content: center;
         }
     </style>
-    
+
 </head>
 
 <body class="animated fadeInRight">
@@ -84,11 +84,8 @@
                     },
                     email: {
                         validators: {
-                            notEmpty: {
-                                message: 'Please enter student Email Address'
-                            },
                             emailAddress: {
-                                message: 'Please enter a valid Email Address'
+                                message: 'The value is not a valid email address'
                             }
                         }
                     },
@@ -104,13 +101,19 @@
                         }
                     }
                 }
-            })
-
+            });
+            // Set Cancel Flag on Click of Cancel Button
+            $("#cancel").click(function () {
+                $("#cancel-fg").val("Y");
+            });
+            $("#update").click(function () {
+                $("#cancel-fg").val("N");
+            });
         });
     </script>
     <div class="container">
 
-        <form class="well form-horizontal" action="#" method="post" id="editForm" style="margin-top: 25px">
+        <form class="well form-horizontal" action="/home/updatestudent" method="post" id="editForm" style="margin-top: 25px">
             <fieldset>
 
                 <!-- Form Name -->
@@ -122,7 +125,8 @@
                     </center>
                 </legend>
                 <br>
-                <input type="hidden" value="<%=data.sId %>"
+                <input type="hidden" value="<%=data.sId %>" name="sId">
+
                 <!-- Text input-->
 
                 <div class="form-group">
@@ -205,13 +209,15 @@
                     </div>
                 </div>
                 <br>
+                <!-- Update Button -->
                 <div class="row sub">
-                    <button type="submit" class="btn btn-warning col-md-3 col-sm-8" id="next">UPDATE</button>
+                    <button type="submit" class="btn btn-warning col-md-3 col-sm-8" id="update">UPDATE</button>
                 </div>
                 <br>
                 <!-- Cancel Button -->
                 <div class="row sub">
                     <button type="submit" class="btn btn-warning col-md-3 col-sm-8" id="cancel">CANCEL</button>
+                    <input type="hidden" name="cancelFlag" id="cancel-fg" value="">
                 </div>
             </fieldset>
         </form>

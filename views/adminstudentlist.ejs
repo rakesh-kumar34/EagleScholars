@@ -145,7 +145,7 @@
                                         <%= user[i].grade %>
                                     </td>
                                     <td class="editdelete">
-                                        <form id="updateForm" method="post" action="/home/updatestudent">
+                                        <form id="updateForm" method="post" action="/home/editstudent">
                                             <input type="hidden" name="sId" value="<%= user[i].studentId %>">
                                             <input type="hidden" name="fName" value="<%= user[i].first_name %>">
                                             <input type="hidden" name="lName" value="<%= user[i].last_name %>">

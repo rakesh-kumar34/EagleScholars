@@ -33,8 +33,18 @@
 
     <script>
         $(document).ready(function () {
+            // Set Cancel Flag on Click of Cancel Button
+            $("#cancel").click(function () {
+                $("#cancel-fg").val("Y");
+            });
+            $("#next").click(function () {
+                $("#cancel-fg").val("N");
+            });
             $('#contact_form').bootstrapValidator({
-                // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+                button: {
+                    selector: '#next',
+                    disabled: 'disabled'
+                },
                 feedbackIcons: {
                     valid: 'glyphicon glyphicon-ok',
                     invalid: 'glyphicon glyphicon-remove',
@@ -151,13 +161,13 @@
                     },
                     image: {
                         validators: {
-                            notEmpty: {
-                                message: 'Please enter image url if available'
+                            stringLength: {
+                                min: 10,
                             }
                         }
                     },
                 }
-            })
+            });
 
         });
     </script>
@@ -348,6 +358,7 @@
                 <!-- Cancel Button -->
                 <div class="row sub">
                     <button type="submit" class="btn btn-warning col-md-3 col-sm-8" id="cancel">CANCEL</button>
+                    <input type="hidden" name="cancelFlag" id="cancel-fg" value="">
                 </div>
             </fieldset>
         </form>
