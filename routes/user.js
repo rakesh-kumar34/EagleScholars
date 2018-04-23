@@ -97,7 +97,7 @@ exports.studentfeedback = function (req, res) {
             if (err) throw err;
             console.log("Inside feedback");
             //console.log(data);
-            message = 'Student feedback has been successfully recorded.';
+            message = 'Feedback has been successfully recorded.';
             res.send(message);
         });
     } else {

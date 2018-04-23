@@ -10,168 +10,200 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 	<!-- FontAwesome Icons -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	    crossorigin="anonymous"></script>
 
-	<head>
+	<script>
+		$(document).ready(function () {
+			$("#fbform").submit(function (event) {
+				event.preventDefault(); //prevent default action 
+				var post_url = $(this).attr("action"); //get form action url
+				var request_method = $(this).attr("method"); //get form GET/POST method
+				var form_data = $(this).serialize(); //Encode form elements for submission
+				console.log(form_data);
+				$.ajax({
+					url: post_url,
+					type: request_method,
+					data: form_data
+				}).done(function (response) { 
+					// Clear feedback form before alert
+					$("#name").val('');
+					$("#email").val('');
+					$("#msg").val('');
 
-		<body class="animated fadeInRight">
-			<div class="wrapper">
-				<!-- Header -->
-				<header>
-					<div style="display:inline">
-						<a href="/home/admin_dashboard" style="text-decoration:none">
-							<img src="/img/ESU.png" alt="ESU" width="1305" height="400" class="name" style="vertical-align:middle" />
-							<img src="/img/lion.png" alt="Tasby Lion Logo" width="180" height="236" class="logo" style="vertical-align:middle" />
-						</a>
-					</div>
-				</header>
+					if(response.length > 0) {
+						alert(response);
+					}
+					else {
+						alert("Error in recording feedback");
+					}
+					//console.log("success");
+				});
+			});
+		});
+	</script>
+</head>
 
-				<!-- Navigation Bar -->
-				<div class="navbar">
-					<nav>
-						<ul>
-							<li>
-								<a href="/home/admin_dashboard">Home</a>
-							</li>
-							<li>
-								<a href="/home/admin_profile">Admin Profile</a>
-							</li>
-							<li>
-								<a href="/home/admin_studentlist">Student List</a>
-							</li>
-							<li class="active">
-								<a href="/home/admin_contact">Contact</a>
-							</li>
-							<li>
-								<a href="/home/logout">Logout</a>
-							</li>
-							<li class="right">
-								<a href="/home/admin_profile">Welcome!
-									<%=user[0].first_name%>&nbsp;
-										<%=user[0].last_name%>
-								</a>
-							</li>
-						</ul>
-					</nav>
-				</div>
-
-				<!-- Content -->
-				<p id="p-header">CONTACT US</p>
-				<div class="contact-left-section">
-					<p>
-						<i>
-							Administrator
-						</i>
-					</p>
-					<p>
-						<b>
-							Janet Morrison-Lane
-						</b>
-						<br>
-						<br>
-						<table>
-							<tr>
-								<td class="fa fa-phone">&nbsp;&nbsp;</td>
-								<td>214-498-6097</td>
-							</tr>
-							<tr>
-								<td class="fa fa-envelope-o">&nbsp;&nbsp;</td>
-								<td>
-									<a href="mailto:janet@vmydf.com">janet@vmydf.com</a>
-								</td>
-							</tr>
-						</table>
-				</div>
-				<div class="contact-right-section">
-					<p>
-						<i>
-							Eagle Scholar's University/Contact Us
-						</i>
-					</p>
-					<br>
-					<p>
-						<b>
-							Sam Tasby Elementary School
-						</b>
-						<br>
-						<a href="https://www.google.com/maps/place/Sam+Tasby+Middle+School/@32.8716587,-96.7621245,17z/data=!3m1!4b1!4m5!3m4!1s0x864e9f8d5e41b80b:0x4cb153cc55ce9dcd!8m2!3d32.8716542!4d-96.7599358?hl=en&authuser=0">
-							7001 Fair Oaks Ave
-							<br> Dallas, TX 75231
-						</a>
-					</p>
-					<br>
-					<h4>Student Information</h4>
-					<br>
-					<p>
-						If you have any inquiries, regarding student information, we will
-						<b>NOT</b> share any private information without consent from the parents of the students. If you are someone claiming
-						to have a relationship with the student, then you are required to show up in person and meet with me.
-					</p>
-					<br>
-					<h4>FAQs</h4>
-					<br>
-					<p id="faq">
-						How can I get my student into the program?
-					</p>
-					<br>
-					<p id="faq-a">
-						We have an
-						<a href="form.html">application</a> on our site. We will need your students grades and application to proceed to the screening process.
-					</p>
-					<br>
-					<p id="faq">
-						What are the requirements for my student to be accepted into the program?
-					</p>
-					<br>
-					<p id="faq-a">
-						Good grades and a desire to go college!
-					</p>
-					<br>
-					<p id="faq">
-						Why should my student be in this program?
-					</p>
-					<br>
-					<p id="faq-a">
-						All of our seniors go to college and have scholarships to accompany them!
-					</p>
-					<br>
-					<h4 style="text-align:center">Feedback</h4>
-					<form class="feedback">
-						<input type="text" placeholder="Write your name here..">
-						<br>
-						<input type="text" placeholder="Email..">
-						<br>
-						<textarea placeholder="What would you like to tell us.."></textarea>
-						<br>
-						<button type="button" id="fback">Submit Feedback</button>
-					</form>
-				</div>
+<body class="animated fadeInRight">
+	<div class="wrapper">
+		<!-- Header -->
+		<header>
+			<div style="display:inline">
+				<a href="/home/admin_dashboard" style="text-decoration:none">
+					<img src="/img/ESU.png" alt="ESU" width="1305" height="400" class="name" style="vertical-align:middle" />
+					<img src="/img/lion.png" alt="Tasby Lion Logo" width="180" height="236" class="logo" style="vertical-align:middle" />
+				</a>
 			</div>
+		</header>
 
-			<!-- Footer -->
-			<footer class="footer">
-				<div>
-					<div class="footer-icons">
-						<a href="#facebook">
-							<i class="fa fa-facebook"></i>
+		<!-- Navigation Bar -->
+		<div class="navbar">
+			<nav>
+				<ul>
+					<li>
+						<a href="/home/admin_dashboard">Home</a>
+					</li>
+					<li>
+						<a href="/home/admin_profile">Admin Profile</a>
+					</li>
+					<li>
+						<a href="/home/admin_studentlist">Student List</a>
+					</li>
+					<li class="active">
+						<a href="/home/admin_contact">Contact</a>
+					</li>
+					<li>
+						<a href="/home/logout">Logout</a>
+					</li>
+					<li class="right">
+						<a href="/home/admin_profile">Welcome!
+							<%=user[0].first_name%>&nbsp;
+								<%=user[0].last_name%>
 						</a>
-						<a href="#twitter">
-							<i class="fa fa-twitter"></i>
-						</a>
-						<a href="#linkedin">
-							<i class="fa fa-linkedin"></i>
-						</a>
-						<a href="#github">
-							<i class="fa fa-github"></i>
-						</a>
-					</div>
-					<br>
-					<div class="footer-copyright">
-						<p>
-							Eagle Scholar's University &copy; 2018
-						</p>
-					</div>
-				</div>
-			</footer>
-		</body>
+					</li>
+				</ul>
+			</nav>
+		</div>
+
+		<!-- Content -->
+		<p id="p-header">CONTACT US</p>
+		<div class="contact-left-section">
+			<p>
+				<i>
+					Administrator
+				</i>
+			</p>
+			<p>
+				<b>
+					Janet Morrison-Lane
+				</b>
+				<br>
+				<br>
+				<table>
+					<tr>
+						<td class="fa fa-phone">&nbsp;&nbsp;</td>
+						<td>214-498-6097</td>
+					</tr>
+					<tr>
+						<td class="fa fa-envelope-o">&nbsp;&nbsp;</td>
+						<td>
+							<a href="mailto:janet@vmydf.com">janet@vmydf.com</a>
+						</td>
+					</tr>
+				</table>
+		</div>
+		<div class="contact-right-section">
+			<p>
+				<i>
+					Eagle Scholar's University/Contact Us
+				</i>
+			</p>
+			<br>
+			<p>
+				<b>
+					Sam Tasby Elementary School
+				</b>
+				<br>
+				<a href="https://www.google.com/maps/place/Sam+Tasby+Middle+School/@32.8716587,-96.7621245,17z/data=!3m1!4b1!4m5!3m4!1s0x864e9f8d5e41b80b:0x4cb153cc55ce9dcd!8m2!3d32.8716542!4d-96.7599358?hl=en&authuser=0">
+					7001 Fair Oaks Ave
+					<br> Dallas, TX 75231
+				</a>
+			</p>
+			<br>
+			<h4>Student Information</h4>
+			<br>
+			<p>
+				If you have any inquiries, regarding student information, we will
+				<b>NOT</b> share any private information without consent from the parents of the students. If you are someone claiming to
+				have a relationship with the student, then you are required to show up in person and meet with me.
+			</p>
+			<br>
+			<h4>FAQs</h4>
+			<br>
+			<p id="faq">
+				How can I get my student into the program?
+			</p>
+			<br>
+			<p id="faq-a">
+				We have an
+				<a href="form.html">application</a> on our site. We will need your students grades and application to proceed to the screening process.
+			</p>
+			<br>
+			<p id="faq">
+				What are the requirements for my student to be accepted into the program?
+			</p>
+			<br>
+			<p id="faq-a">
+				Good grades and a desire to go college!
+			</p>
+			<br>
+			<p id="faq">
+				Why should my student be in this program?
+			</p>
+			<br>
+			<p id="faq-a">
+				All of our seniors go to college and have scholarships to accompany them!
+			</p>
+			<br>
+			<h4 style="text-align:center">Feedback</h4>
+			<form class="feedback" id="fbform" method="post" action="/home/studentfeedback">
+				<input type="text" id="name" name="student-name" placeholder="Write your name here..">
+				<br>
+				<input type="text" id="email" name="student-email" placeholder="Email.." required>
+				<br>
+				<textarea name="student-msg" id="msg" placeholder="What would you like to tell us.." required></textarea>
+				<br>
+				<button type="submit" id="fback">Submit Feedback</button>
+				<br>
+			</form>
+		</div>
+	</div>
+
+	<!-- Footer -->
+	<footer class="footer">
+		<div>
+			<div class="footer-icons">
+				<a href="#facebook">
+					<i class="fa fa-facebook"></i>
+				</a>
+				<a href="#twitter">
+					<i class="fa fa-twitter"></i>
+				</a>
+				<a href="#linkedin">
+					<i class="fa fa-linkedin"></i>
+				</a>
+				<a href="#github">
+					<i class="fa fa-github"></i>
+				</a>
+			</div>
+			<br>
+			<div class="footer-copyright">
+				<p>
+					Eagle Scholar's University &copy; 2018
+				</p>
+			</div>
+		</div>
+	</footer>
+</body>
 
 </html>
