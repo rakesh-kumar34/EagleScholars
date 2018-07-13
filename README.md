@@ -11,4 +11,4 @@ The application provides the following functionalities:
   5. Relational Database (MySQL) to store student records and data.
   
   
-The technology stack used was NodeJS with Express on the server side with the EJS templating framework to display dynamic content to the user. We used MySQL as our database. The application was hosted on Heroku and initial credentials were shared with the client. 
+The technology stack used was NodeJS with Express on the server side with the EJS templating framework to display dynamic content to the user. We used MySQL as our database. Responsive Web Design was implemneted through the use of Bootstrap, Media Queries and Flex Box. The application was hosted on Heroku and initial credentials were shared with the client. 
